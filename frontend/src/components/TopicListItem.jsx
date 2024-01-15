@@ -2,8 +2,8 @@ import React from "react";
 
 import "../styles/TopicListItem.scss";
 
-const TopicListItem = ({ data }) => {
-  const { slug, title } = data;
+const TopicListItem = ({ label }) => {
+  const { slug, title } = label;
 
   return (
     <div className="topic-list__item">
