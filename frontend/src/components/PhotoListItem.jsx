@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
+import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = ({ data }) => {
   /* Insert React */
@@ -9,6 +10,7 @@ const PhotoListItem = ({ data }) => {
 
   return (
     <div className="photo-list__item">
+      <PhotoFavButton />
       <img
         src={data.imageSource}
         alt={data.location.city + " photo"}
