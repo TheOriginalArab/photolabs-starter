@@ -3,14 +3,14 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({ data }) => {
+const PhotoListItem = ({ photo }) => {
   /* Insert React */
 
   const {
     location: { city, country },
     urls: { regular },
     user: { username, name, profile },
-  } = data;
+  } = photo;
 
   return (
     <div className="photo-list__item">
