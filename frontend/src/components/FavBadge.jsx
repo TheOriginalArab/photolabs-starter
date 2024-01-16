@@ -3,15 +3,13 @@ import FavIcon from "./FavIcon";
 
 import "../styles/FavBadge.scss";
 
-const FavBadge = ({ photos, favoritePhotos, photoId }) => {
+const FavBadge = ({ favoritePhotos, photoId }) => {
   console.log("favoritePhotos", favoritePhotos);
   console.log("photoId", photoId);
-  const selectedPhoto =
-    Array.isArray(favoritePhotos) && favoritePhotos.includes(photoId);
-  const displayAlert = favoritePhotos > 0;
+  const displayAlert = favoritePhotos.length > 0;
   return (
     <div className="fav-badge">
-      <FavIcon displayAlert={displayAlert} selectedPhoto={selectedPhoto} />
+      <FavIcon displayAlert={displayAlert} selectedPhoto={true} />
     </div>
   );
 };
