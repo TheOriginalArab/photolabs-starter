@@ -7,7 +7,8 @@ const HomeRoute = ( {
   photos,
   topics,
   favoritePhotos,
-  toggleFavorite 
+  toggleFavorite,
+  onPhotoClick
 }) => {
 
   return (
@@ -21,6 +22,7 @@ const HomeRoute = ( {
         photos={photos}
         favoritePhotos={favoritePhotos}
         toggleFavorite={toggleFavorite}
+        onPhotoClick={onPhotoClick}
       />
     </div>
   );
