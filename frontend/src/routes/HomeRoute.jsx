@@ -6,8 +6,14 @@ import "../styles/HomeRoute.scss";
 const HomeRoute = (props) => {
   return (
     <div className="home-route">
-      <TopNavigation topics={props.topics}/>
-      <PhotoList photos={props.photos}/>
+      <TopNavigation
+        topics={props.topics}
+        favoritePhotos={props.favoritePhotos}
+      />
+      <PhotoList 
+        photos={props.photos} 
+        toggleFavorite={props.toggleFavorite}
+      />      
     </div>
   );
 };
