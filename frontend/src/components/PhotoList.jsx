@@ -5,7 +5,8 @@ import "../styles/PhotoList.scss";
 const PhotoList = ( { 
   photos,
   toggleFavorite,
-  favoritePhotos
+  favoritePhotos,
+  onPhotoClick
 } ) => {
   return (
     <ul className="photo-list">
@@ -17,6 +18,7 @@ const PhotoList = ( {
           photos={photos}
           favoritePhotos={favoritePhotos}
           toggleFavorite={toggleFavorite}
+          onPhotoClick={onPhotoClick}
         />
       ))}
     </ul>
