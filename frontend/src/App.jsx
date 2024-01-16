@@ -7,20 +7,17 @@ import { useState } from "react";
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [favoritePhotos, setFavoritePhotos] = useState({});
+  const [favoritePhotos, setFavoritePhotos] = useState([]);
 
   const toggleFavorite = (id) => {
-    setFavoritePhotos((prevFavoritePhotos) => {
-      const newFavorites = { ...prevFavoritePhotos };
-
-      if (newFavorites[id]) {
-        delete newFavorites[id];
-      } else {
-        newFavorites[id] = true;
-      }
-      //console.log(newFavorites);
-      return newFavorites;
-    });
+    console.log("toggleFavorite triggered!", id)
+    if (favoritePhotos.includes(id)) {
+      return setFavoritePhotos(
+        favoritePhotos.filter((favPhotoId) => favPhotoId !== id)
+      );
+    } else {
+      return setFavoritePhotos((prev) => prev.push(id));
+    }
   };
 
   return (
