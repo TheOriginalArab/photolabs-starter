@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({ photo }) => {
+const PhotoListItem = ({ photo, toggleFavorite }) => {
   /* Insert React */
 
   const {
@@ -14,7 +14,10 @@ const PhotoListItem = ({ photo }) => {
 
   return (
     <div className="photo-list__item">
-      <PhotoFavButton />
+      <PhotoFavButton 
+        photo={photo}
+        toggleFavorite={toggleFavorite}
+      />
       <img
         src={regular}
         alt={`Photo Taken in ${city}, ${country} by ${name} (@${username})`}
