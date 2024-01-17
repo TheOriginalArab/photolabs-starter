@@ -27,10 +27,23 @@ const PhotoDetailsModal = ({
         {selectedPhoto && (
           <img
             key={selectedPhoto.id}
-            src={selectedPhoto.urls.full}
+            src={photo.urls.full}
             className="photo-details-modal__image"
           />
         )}
+        <div className="photo-list__user-details">
+          <img
+            className="photo-list__user-profile"
+            src={photo.user.profile}
+            alt="User Profile"
+          />
+          <div>
+            <div className="photo-list__user-info">{photo.user.name}</div>
+            <div className="photo-list__user-location">
+              {photo.location.city}, {photo.location.country}
+            </div>
+          </div>
+        </div>
         <h3>Similar Photos:</h3>
         <PhotoList
           photos={similarPhoto}
