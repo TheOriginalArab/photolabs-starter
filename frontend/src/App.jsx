@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.scss";
+import "./styles/PhotoDetailsModal.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import mockPhotoData from "mocks/photos";
@@ -33,6 +34,9 @@ const App = () => {
     setSelectedPhoto(null);
   };
 
+
+  const photoId = selectedPhoto?.id;
+
   return (
     <div className="App">
       <HomeRoute
@@ -43,13 +47,14 @@ const App = () => {
         onPhotoClick={handlePhotoClick}
       />
       <PhotoDetailsModal
+        photoId={photoId}
+        photos={mockPhotoData}
+        favoritePhotos={favoritePhotos}
+        toggleFavorite={toggleFavorite}
         isOpen={isModalOpen}
         onClose={handleModalClose}
-      >
-        <div>
-          {selectedPhoto && <img src={selectedPhoto.urls.regular} />}
-        </div>
-      </PhotoDetailsModal>
+        selectedPhoto={selectedPhoto}
+      />
     </div>
   );
 };
