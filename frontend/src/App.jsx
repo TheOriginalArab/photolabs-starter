@@ -6,15 +6,15 @@ import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import mockPhotoData from "mocks/photos";
 import mockTopicData from "mocks/topics";
 import { useState } from "react";
+import useApplicationData from "hooks/useApplicationData";
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [favoritePhotos, setFavoritePhotos] = useState([]);
+  /* const [favoritePhotos, setFavoritePhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleFavorite = (id) => {
-    console.log("toggleFavorite triggered!", id);
     if (favoritePhotos.includes(id)) {
       return setFavoritePhotos(
         favoritePhotos.filter((favPhotoId) => favPhotoId !== id)
@@ -32,8 +32,16 @@ const App = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
     setSelectedPhoto(null);
-  };
+  }; */
 
+  const {
+    favoritePhotos,
+    toggleFavorite,
+    selectedPhoto,
+    isModalOpen,
+    handlePhotoClick,
+    handleModalClose,
+  } = useApplicationData();
 
   const photoId = selectedPhoto?.id;
 
