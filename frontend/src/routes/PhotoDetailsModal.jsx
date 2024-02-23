@@ -1,6 +1,7 @@
 import React from "react";
 import PhotoList from "components/PhotoList";
 import "../styles/PhotoDetailsModal.scss";
+import "../styles/PhotoList.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 
 const PhotoDetailsModal = ({
@@ -31,23 +32,26 @@ const PhotoDetailsModal = ({
             className="photo-details-modal__image"
           />
         )}
-        <div className="photo-list__user-details">
-          <img
-            className="photo-list__user-profile"
-            src={photo.user.profile}
-            alt="User Profile"
-          />
-          <div>
-            <div className="photo-list__user-info">{photo.user.name}</div>
-            <div className="photo-list__user-location">
-              {photo.location.city}, {photo.location.country}
+        <div className="photo-details-modal__header">
+          <div className="photo-details-modal__photographer-details">
+            <img
+              className="photo-details-modal__photographer-profile"
+              src={photo.user.profile}
+              alt="User Profile"
+            />
+            <div>
+              <div className="photo-details-modal__photographer-info">
+                {photo.user.name}
+              </div>
+              <div className="photo-details-modal__photographer-location">
+                {photo.location.city}, {photo.location.country}
+              </div>
             </div>
           </div>
         </div>
         <h3>Similar Photos:</h3>
         <PhotoList
           photos={similarPhoto}
-          selectedPhoto={selectedPhoto}
           favoritePhotos={favoritePhotos}
           toggleFavorite={toggleFavorite}
         />
