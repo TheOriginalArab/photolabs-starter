@@ -4,7 +4,6 @@ import { useState, useReducer } from "react";
 const initialState = {
   selectedPhoto: null,
   isModalOpen: false,
-  favPhotoIdObject: [],
 };
 
 export const ACTIONS = {
@@ -45,56 +44,29 @@ function reducer(state, action) {
   }
 }
 
-const toggleFavorite = (id) => {
-  if (state.favoritePhotos.includes(id)) {
-    dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: id });
-  } else {
-    dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: id });
-  }
-};
-
 const useApplicationData = () => {
-  //const [favoritePhotos, setFavoritePhotos] = useState([]);
-  /* const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); */
-
-  /* const toggleFavorite = (id) => {
-    if (favoritePhotos.includes(id)) {
-      return setFavoritePhotos(
-        favoritePhotos.filter((favPhotoId) => favPhotoId !== id)
-      );
-    } else {
-      return setFavoritePhotos((prev) => [...prev, id]);
-    }
-  }; */
-
-  /* const handlePhotoClick = (photo) => {
-    setSelectedPhoto(photo);
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedPhoto(null);
-  };
- */
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  /* const handlePhotoClick = (photo) => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
-    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: true });
-  }; */
+  const toggleFavorite = (id) => {
+    if (state.favoritePhotos.includes(id)) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: id });
+    } else {
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: id });
+    }
+  };
 
   const handleSelectPhoto = (photo) => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
+    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: true });
   };
 
   const handleModalClose = () => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: null });
+    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: false });
   };
 
   return {
-    favoritePhotos,
+    favoritePhotos: state.favoritePhotos,
     toggleFavorite,
     handleSelectPhoto,
     handleModalClose,
