@@ -45,8 +45,16 @@ function reducer(state, action) {
   }
 }
 
+const toggleFavorite = (id) => {
+  if (state.favoritePhotos.includes(id)) {
+    dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: id });
+  } else {
+    dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: id });
+  }
+};
+
 const useApplicationData = () => {
-  const [favoritePhotos, setFavoritePhotos] = useState([]);
+  //const [favoritePhotos, setFavoritePhotos] = useState([]);
   /* const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); */
 
@@ -59,14 +67,6 @@ const useApplicationData = () => {
       return setFavoritePhotos((prev) => [...prev, id]);
     }
   }; */
-
-  const toggleFavorite = (id) => {
-    if (state.favoritePhotos.includes(id)) {
-      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: id });
-    } else {
-      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: id });
-    }
-  };
 
   /* const handlePhotoClick = (photo) => {
     setSelectedPhoto(photo);
@@ -90,7 +90,7 @@ const useApplicationData = () => {
   };
 
   const handleModalClose = () => {
-    dispatch({ type: CLOSE_MODAL });
+    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: null });
   };
 
   return {
