@@ -3,42 +3,15 @@ import "./App.scss";
 import "./styles/PhotoDetailsModal.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
-import mockPhotoData from "mocks/photos";
-import mockTopicData from "mocks/topics";
-import { useState } from "react";
 import useApplicationData from "hooks/useApplicationData";
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  /* const [favoritePhotos, setFavoritePhotos] = useState([]);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleFavorite = (id) => {
-    if (favoritePhotos.includes(id)) {
-      return setFavoritePhotos(
-        favoritePhotos.filter((favPhotoId) => favPhotoId !== id)
-      );
-    } else {
-      return setFavoritePhotos((prev) => [...prev, id]);
-    }
-  };
-
-  const handlePhotoClick = (photo) => {
-    setSelectedPhoto(photo);
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedPhoto(null);
-  }; */
-
   const {
-    favoritePhotos,
+    state: { photoData, topicData, favoritePhotos },
     toggleFavorite,
     selectedPhoto,
-    isModalOpen,
+    //isModalOpen,
     handlePhotoClick,
     handleModalClose,
   } = useApplicationData();
@@ -48,18 +21,18 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
-        photos={mockPhotoData}
-        topics={mockTopicData}
+        photos={state.photoData}
+        topics={state.topicData}
         favoritePhotos={favoritePhotos}
         toggleFavorite={toggleFavorite}
         onPhotoClick={handlePhotoClick}
       />
       <PhotoDetailsModal
         photoId={photoId}
-        photos={mockPhotoData}
+        photos={state.photoData}
         favoritePhotos={favoritePhotos}
         toggleFavorite={toggleFavorite}
-        isOpen={isModalOpen}
+        //isOpen={isModalOpen}
         onClose={handleModalClose}
         selectedPhoto={selectedPhoto}
       />
