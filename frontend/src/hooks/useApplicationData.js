@@ -1,3 +1,4 @@
+import { response } from "express";
 import { useEffect, useReducer } from "react";
 //import photos from "mocks/photos";
 
@@ -14,6 +15,7 @@ export const ACTIONS = {
   FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
+  GET_PHOTOS_BY_TOPIC: "GET_PHOTOS_BY_TOPIC",
   SELECT_PHOTO: "SELECT_PHOTO",
   DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
 };
@@ -36,6 +38,8 @@ function reducer(state, action) {
       return { ...state, photoData: action.payload };
     case ACTIONS.SET_TOPIC_DATA:
       return { ...state, topicData: action.payload };
+    case ACTIONS.GET_PHOTOS_BY_TOPIC:
+      return { ...state, photoData: action.payload };
     case ACTIONS.SELECT_PHOTO:
       return { ...state, selectedPhoto: action.payload };
     case ACTIONS.DISPLAY_PHOTO_DETAILS:
@@ -64,6 +68,14 @@ const useApplicationData = () => {
       });
   }, []);
 
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+      .then((response) => response.json)
+      .then((data) => {
+        dispatch({ type: "GET_PHOTOS_BY_TOPIC", payload: data });
+      });
+  };
+
   const toggleFavorite = (id) => {
     if (state.favoritePhotos.includes(id)) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: id });
@@ -89,6 +101,7 @@ const useApplicationData = () => {
     handleModalClose,
     photoData: state.photoData,
     topicData: state.topicData,
+    fetchPhotosByTopic,
   };
 };
 
