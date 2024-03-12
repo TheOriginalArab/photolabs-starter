@@ -14,6 +14,7 @@ const App = () => {
     //isModalOpen,
     handlePhotoClick,
     handleModalClose,
+    fetchPhotosByTopic,
   } = useApplicationData();
 
   const photoId = selectedPhoto?.id;
@@ -23,6 +24,7 @@ const App = () => {
       <HomeRoute
         photos={state.photoData}
         topics={state.topicData}
+        fetchPhotosByTopic={fetchPhotosByTopic}
         favoritePhotos={favoritePhotos}
         toggleFavorite={toggleFavorite}
         onPhotoClick={handlePhotoClick}
