@@ -1,9 +1,12 @@
-import { useState, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 //import photos from "mocks/photos";
 
 const initialState = {
   selectedPhoto: null,
   isModalOpen: false,
+  favoritePhotos: [],
+  photoData: [],
+  topicData: [],
 };
 
 export const ACTIONS = {
@@ -30,9 +33,9 @@ function reducer(state, action) {
         ),
       };
     case ACTIONS.SET_PHOTO_DATA:
-      return { ...state, photos: action.payload };
+      return { ...state, photoData: action.payload };
     case ACTIONS.SET_TOPIC_DATA:
-      return { ...state, topics: action.payload };
+      return { ...state, topicData: action.payload };
     case ACTIONS.SELECT_PHOTO:
       return { ...state, selectedPhoto: action.payload };
     case ACTIONS.DISPLAY_PHOTO_DETAILS:
@@ -46,6 +49,20 @@ function reducer(state, action) {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    fetch("http://localhost:8001/api/topics")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: "SET_TOPIC_DATA", payload: data });
+      });
+
+    fetch("http://localhost:8001/api/photos")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: "SET_PHOTO_DATA", payload: data });
+      });
+  }, []);
 
   const toggleFavorite = (id) => {
     if (state.favoritePhotos.includes(id)) {
@@ -70,6 +87,8 @@ const useApplicationData = () => {
     toggleFavorite,
     handleSelectPhoto,
     handleModalClose,
+    photoData: state.photoData,
+    topicData: state.topicData,
   };
 };
 
