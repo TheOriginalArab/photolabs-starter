@@ -1,10 +1,7 @@
-import { response } from "express";
 import { useEffect, useReducer } from "react";
-//import photos from "mocks/photos";
 
 const initialState = {
   selectedPhoto: null,
-  isModalOpen: false,
   favoritePhotos: [],
   photoData: [],
   topicData: [],
@@ -41,9 +38,7 @@ function reducer(state, action) {
     case ACTIONS.GET_PHOTOS_BY_TOPIC:
       return { ...state, photoData: action.payload };
     case ACTIONS.SELECT_PHOTO:
-      return { ...state, selectedPhoto: action.payload };
-    case ACTIONS.DISPLAY_PHOTO_DETAILS:
-      return { ...state, isModalOpen: action.payload };
+      return { ...state, selectedPhoto: action.selectedPhoto };
     default:
       throw new Error(
         `tried to reduce with unsupported action type: ${action.type}`
@@ -70,9 +65,17 @@ const useApplicationData = () => {
 
   const fetchPhotosByTopic = (topicId) => {
     fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
-      .then((response) => response.json)
+      .then((response) => response.json())
       .then((data) => {
         dispatch({ type: "GET_PHOTOS_BY_TOPIC", payload: data });
+      });
+  };
+
+  const fetchAllPhotos = () => {
+    fetch("http://localhost:8001/api/photos")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: "SET_PHOTO_DATA", payload: data });
       });
   };
 
@@ -85,16 +88,15 @@ const useApplicationData = () => {
   };
 
   const handleSelectPhoto = (photo) => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
-    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: true });
+    dispatch({ type: ACTIONS.SELECT_PHOTO, selectedPhoto: photo });
   };
 
   const handleModalClose = () => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: null });
-    dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: false });
+    dispatch({ type: ACTIONS.SELECT_PHOTO, selectedPhoto: null });
   };
 
   return {
+    state,
     favoritePhotos: state.favoritePhotos,
     toggleFavorite,
     handleSelectPhoto,
@@ -102,6 +104,8 @@ const useApplicationData = () => {
     photoData: state.photoData,
     topicData: state.topicData,
     fetchPhotosByTopic,
+    fetchAllPhotos,
+    selectedPhoto: state.selectedPhoto,
   };
 };
 
