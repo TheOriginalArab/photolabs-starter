@@ -1,8 +1,6 @@
 import React from "react";
 
 const FavIcon = ({ displayAlert, selectedPhoto }) => {
-  //console.log("displayAlert", displayAlert)
-  //console.log("selected", selected)
 
   return (
     <svg
