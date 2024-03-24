@@ -8,16 +8,9 @@ const PhotoListItem = ({
   photos,
   toggleFavorite,
   favoritePhotos,
-  onPhotoClick,
+  handleSelectPhoto,
 }) => {
-  /* Insert React */
-
-  const {
-    location: { city, country },
-    urls: { regular },
-    user: { username, name, profile },
-  } = photo;
-
+ 
   return (
     <div className="photo-list__item">
       <PhotoFavButton
@@ -28,21 +21,21 @@ const PhotoListItem = ({
         favoritePhotos={favoritePhotos}
       />
       <img
-        onClick={() => onPhotoClick(photo)}
-        src={regular}
-        alt={`Photo Taken in ${city}, ${country} by ${name} (@${username})`}
         className="photo-list__image"
+        src={photo.urls.regular}
+        onClick={() => handleSelectPhoto(photo)}
+        alt="User's Posted Image"
       />
       <div className="photo-list__user-details">
         <img
-          src={profile}
-          alt={`${name}'s profile`}
+          src={photo.user.profile}
+          alt="User Profile Picture"
           className="photo-list__user-profile"
         />
         <div className="photo-list__user-info">
-          <div className="photo-list__user-info">{username}</div>
+          <div className="photo-list__user-info">{photo.user.name}</div>
           <div className="photo-list__user-location">
-            {`${city}, ${country}`}
+            {photo.location.city}, {photo.location.country}
           </div>
         </div>
       </div>
