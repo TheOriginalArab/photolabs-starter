@@ -6,7 +6,6 @@ import "../styles/PhotoFavButton.scss";
 function PhotoFavButton({ toggleFavorite, photoId, favoritePhotos }) {
   const handleClick = (photoId) => {
     toggleFavorite(photoId);
-    console.log("click fired!", photoId);
   };
 
   const selectedPhoto = favoritePhotos.includes(photoId);
