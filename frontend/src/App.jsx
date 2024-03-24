@@ -11,10 +11,10 @@ const App = () => {
     state: { photoData, topicData, favoritePhotos },
     toggleFavorite,
     selectedPhoto,
-    //isModalOpen,
-    handlePhotoClick,
+    handleSelectPhoto,
     handleModalClose,
     fetchPhotosByTopic,
+    fetchAllPhotos,
   } = useApplicationData();
 
   const photoId = selectedPhoto?.id;
@@ -22,22 +22,25 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
-        photos={state.photoData}
-        topics={state.topicData}
+        photos={photoData}
+        topics={topicData}
         fetchPhotosByTopic={fetchPhotosByTopic}
         favoritePhotos={favoritePhotos}
         toggleFavorite={toggleFavorite}
-        onPhotoClick={handlePhotoClick}
+        handleSelectPhoto={handleSelectPhoto}
+        fetchAllPhotos={fetchAllPhotos}
       />
-      <PhotoDetailsModal
-        photoId={photoId}
-        photos={state.photoData}
-        favoritePhotos={favoritePhotos}
-        toggleFavorite={toggleFavorite}
-        //isOpen={isModalOpen}
-        onClose={handleModalClose}
-        selectedPhoto={selectedPhoto}
-      />
+      {selectedPhoto && (
+        <PhotoDetailsModal
+          photoId={photoId}
+          photos={photoData}
+          favoritePhotos={favoritePhotos}
+          toggleFavorite={toggleFavorite}
+          handleModalClose={handleModalClose}
+          selectedPhoto={selectedPhoto}
+          handleSelectPhoto={handleSelectPhoto}
+        />
+      )}
     </div>
   );
 };
