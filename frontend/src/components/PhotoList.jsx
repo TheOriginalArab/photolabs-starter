@@ -2,25 +2,26 @@ import React from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
-const PhotoList = ( { 
+const PhotoList = ({
   photos,
   toggleFavorite,
   favoritePhotos,
-  onPhotoClick
-} ) => {
+  handleSelectPhoto,
+}) => {
   return (
     <ul className="photo-list">
-      {photos.map((photo) => (
-        <PhotoListItem
-          key={photo.id}
-          photoId={photo.id}
-          photo={photo}
-          photos={photos}
-          favoritePhotos={favoritePhotos}
-          toggleFavorite={toggleFavorite}
-          onPhotoClick={onPhotoClick}
-        />
-      ))}
+      {photos &&
+        photos.map((photo) => (
+          <PhotoListItem
+            key={photo.id}
+            photoId={photo.id}
+            photo={photo}
+            photos={photos}
+            favoritePhotos={favoritePhotos}
+            toggleFavorite={toggleFavorite}
+            handleSelectPhoto={handleSelectPhoto}
+          />
+        ))}
     </ul>
   );
 };
